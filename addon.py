@@ -7,5 +7,5 @@ addon       = xbmcaddon.Addon()
 addonname   = addon.getAddonInfo('name')
 
 xbmc.log("Program MissingSeriesFinder runs in Background");
-Popen(["./MissingSeriesFinder.pl", "–path"])
+Popen(["./MissingSeriesFinder.pl", "–path=~/test"])
 xbmc.log("Program MissingSeriesFinder finished");
