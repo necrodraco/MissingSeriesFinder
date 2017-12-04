@@ -8,7 +8,7 @@
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
-		<summary lang="en">Popup Hello World</summary>
+		<summary lang="en">Missing Series Finder</summary>
 		<description lang="en">Did you think that one of your most series got an new episode or special episode? This addon tells you, if you got an new Episode and create an Log, where all the missing episodes will be listed</description>
 		<license>GNU General Public License, v2</license>
 		<language></language>
