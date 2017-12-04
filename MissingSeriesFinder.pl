@@ -3,7 +3,7 @@
 use Data::Dumper; 
 use Getopt::Long;
 
-use lib 'src';
+use lib 'lib';
 use SqlManager; 
 use XmlReader; 
 
@@ -16,6 +16,9 @@ print 'path is '.(Dumper $path);
 
 my $xmlReader = XmlReader->new();
 
-$xmlReader->read('./addon.xml');
+my $source = $xmlReader->read($path.'settings.xml');
+print Dumper $source;
+print Dumper $source->{'setting'}->{'host'};
+my $sql = SqlManager->new(
 
-#my $sql = SqlManager->new();
+);

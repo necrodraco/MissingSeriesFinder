@@ -5,7 +5,9 @@ import shlex, subprocess
 
 addon       = xbmcaddon.Addon()
 addonname   = addon.getAddonInfo('name')
+addondir    = xbmc.translatePath( addon.getAddonInfo('profile') )
 
 xbmc.log("Program MissingSeriesFinder runs in Background");
-Popen(["./MissingSeriesFinder.pl", "–path=~/test"])
+#xbmc.log("dir is: " + addondir);
+subprocess.call(["perl", "./MissingSeriesFinder.pl", "-path=" + addondir])
 xbmc.log("Program MissingSeriesFinder finished");

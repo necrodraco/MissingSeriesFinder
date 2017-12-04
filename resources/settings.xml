@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+    <category label="32001" id="section_general">
+        <setting label="32003" id="Path_to_Log" type="folder" source="auto" option="writeable" />
+        <setting label="32004" id="LogOption" type="bool" default="false"/>
+    </category>
+    <category label="32002" id="section_mysql">
+        <setting label="32005" type="text" id="host" default="127.0.0.1" /> 
+        <setting label="32006" type="text" id="port" default="3306"/>
+        <setting label="32007" type="text" id="dbName" default="MyVideos93"/>
+        <setting label="32008" type="text" id="username" />
+        <setting label="32009" type="text" id="password" option="hidden" />
+    </category>
+</settings>

@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Language: en\n"
+
+msgctxt "#32001"
+msgid "General"
+msgstr ""
+
+msgctxt "#32002"
+msgid "Mysql"
+msgstr ""
+
+msgctxt "#32003"
+msgid "Folder for Missing Log"
+msgstr ""
+
+msgctxt "#32004"
+msgid "Logging as File?"
+msgstr ""
+
+msgctxt "#32005"
+msgid "Ip of Database"
+msgstr ""
+
+msgctxt "#32006"
+msgid "Port of Database"
+msgstr ""
+
+msgctxt "#32007"
+msgid "Name of the Database"
+msgstr ""
+
+msgctxt "#32008"
+msgid "Username"
+msgstr ""
+
+msgctxt "#32009"
+msgid "Password"
+msgstr ""

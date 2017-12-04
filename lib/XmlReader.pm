@@ -9,6 +9,7 @@ package XmlReader{
 	sub read(){
 		my ($self, $file) = @_;
 		$self->xml(XMLin($file));
+		return $self->xml();
 	}
 }
 1; 
