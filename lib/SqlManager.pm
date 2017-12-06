@@ -45,7 +45,6 @@ package SqlManager{
 
 		if(defined($worked) && $worked ne '0E0'){
 			while(my $row = $sth->fetchrow_hashref()){
-				#$series->{$row->{'seriesId'}}->{'name'} = $row->{'seriesName'};
 				$series->{$row->{'seriesId'}}->{'episodes'}->{'S'.$self->setDigit($row->{'seasonNumber'}).'E'.$self->setDigit($row->{'episodeNumber'})} = 1;
 			}
 		}

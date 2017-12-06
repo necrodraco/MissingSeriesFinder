@@ -6,6 +6,7 @@ use Getopt::Long;
 use lib 'lib';
 use SqlManager; 
 use XmlReader; 
+use IO::Handle; 
 
 my $path   = '';
 GetOptions (
@@ -48,7 +49,23 @@ if($path ne '' && -e $path ){
 			}
 		}
 	}
-	print 'Missing: '.(Dumper $missing); 
+
+	my $log = 1; 
+	if($source->{'LogOption'}->{'value'} eq 'false'){
+		$log = 0; 
+		open OUTPUT, '>', $source->{'Path_to_Log'}->{'value'}.'missing.log' or die $!;
+		STDOUT->fdopen( \*OUTPUT, 'w' ) or die $!;
+	}
+
+	while(my ($name, $episodes) = each %{$missing}){
+		print "$name\n"; 
+		while(my ($ename, $stat) = each %{$episodes}){
+			print '	'."$ename\n";
+			#if($log == 1);
+		}
+		print "\n";
+	}
+
 }else{
 	print 'Arguments are not set or false. Please run directly from Kodi Module';
 }
