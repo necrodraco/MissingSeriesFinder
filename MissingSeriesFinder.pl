@@ -18,7 +18,7 @@ if($path ne '' && -e $path ){
 	my $xmlReader = XmlReader->new();
 
 	my $source = $xmlReader->read($path.'settings.xml')->{'setting'};
-	print Dumper $source;
+	
 	my $sql; 
 	if($source->{'sql'}->{'value'} == 0){
 		$sql = SqlManager->new(
@@ -31,13 +31,24 @@ if($path ne '' && -e $path ){
 		$sql->connect();
 	}
 	my $list = $sql->getSeries();
-	print Dumper $list; 
-
+	
 	my $list2 = ();
 	while(my ($id, $serie) = each %{$list}){
 		my $content = $xmlReader->readFromXml('http://www.thetvdb.com/api/1D62F2F90030C444/series/'.$id.'/all/en.xml');
-		print Dumper $content; 
+		$list2->{$id} = $content->{$id};
 	}
+
+	my $missing = (); 
+	while(my ($id2, $serie2) = each %{$list2}){
+		my $episodes = $list->{$id2}->{'episodes'};
+		my $episodes2 = $serie2->{'episodes'}; 
+		while(my ($episode, $stat) = each %{$episodes2}){
+			if(!defined($episodes->{$episode})){
+				$missing->{$serie2->{'name'}}->{$episode} = 1; 
+			}
+		}
+	}
+	print 'Missing: '.(Dumper $missing); 
 }else{
 	print 'Arguments are not set or false. Please run directly from Kodi Module';
 }
