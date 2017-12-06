@@ -7,7 +7,7 @@ msgid "General"
 msgstr ""
 
 msgctxt "#32002"
-msgid "Mysql"
+msgid "Sql-Connection Datas"
 msgstr ""
 
 msgctxt "#32003"
@@ -19,21 +19,34 @@ msgid "Logging as File?"
 msgstr ""
 
 msgctxt "#32005"
+msgid "Supported SQLs for the Video Database"
+msgstr ""
+
+
+msgctxt "#32006"
 msgid "Ip of Database"
 msgstr ""
 
-msgctxt "#32006"
+msgctxt "#32007"
 msgid "Port of Database"
 msgstr ""
 
-msgctxt "#32007"
+msgctxt "#32008"
 msgid "Name of the Database"
 msgstr ""
 
-msgctxt "#32008"
+msgctxt "#32009"
 msgid "Username"
 msgstr ""
 
-msgctxt "#32009"
+msgctxt "#32010"
 msgid "Password"
+msgstr ""
+
+msgctxt "#32011"
+msgid "MySql"
+msgstr ""
+
+msgctxt "#32012"
+msgid "Nothing"
 msgstr ""
