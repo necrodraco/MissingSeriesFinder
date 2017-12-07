@@ -7,6 +7,9 @@ use lib 'lib';
 use SqlManager; 
 use XmlReader; 
 use IO::Handle; 
+use File::Copy "cp"; 
+use File::Basename;
+use File::Path qw/make_path/;
 
 my $path   = '';
 GetOptions (
@@ -20,6 +23,9 @@ if($path ne '' && -e $path ){
 
 	my $source = $xmlReader->read($path.'settings.xml')->{'setting'};
 	
+	open OUTPUT, '>', $source->{'Path_to_Log'}->{'value'}.'missing.log' or die $!;
+	STDOUT->fdopen( \*OUTPUT, 'w' ) or die $!;
+
 	my $sql; 
 	if($source->{'sql'}->{'value'} == 0){
 		$sql = SqlManager->new(
@@ -50,18 +56,21 @@ if($path ne '' && -e $path ){
 		}
 	}
 
-	my $log = 1; 
-	if($source->{'LogOption'}->{'value'} eq 'false'){
-		$log = 0; 
-		open OUTPUT, '>', $source->{'Path_to_Log'}->{'value'}.'missing.log' or die $!;
-		STDOUT->fdopen( \*OUTPUT, 'w' ) or die $!;
+	my $log = 0;
+	if($source->{'LogOption'}->{'value'} eq 'true'){
+		$log = 1; 
 	}
 
 	while(my ($name, $episodes) = each %{$missing}){
 		print "$name\n"; 
 		while(my ($ename, $stat) = each %{$episodes}){
-			print '	'."$ename\n";
-			#if($log == 1);
+			print "\t$ename\n";
+			if($log == 1){
+				my $dir = $source->{'Path_to_Log'}->{'value'}."missing/$name/";
+				my $file = $dir."$ename.disc"; 
+				make_path($dir) if( !(-e $dir));
+				cp('./resources/empty.disc', $file) or die 'copy Failed';
+			};
 		}
 		print "\n";
 	}
