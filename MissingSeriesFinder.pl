@@ -81,7 +81,15 @@ if($path ne '' && -e $path && $home ne '' && -e $home){
 		my $dir = $source->{'Path_to_Log'}->{'value'}."MissingSeries/$serie->{'name'}/";
 		foreach my $episode(values %{$found->{'Episode'}}){
 			my $ename = 'S'.setDigit($episode->{'SeasonNumber'}).'E'.setDigit($episode->{'EpisodeNumber'}); 
-			next if(defined($list{$id}{'episodes'}{$ename}));
+			my $count = 1; 
+			if(ref($episode->{'EpisodeName'}) eq "HASH"){
+				$count = keys %{ $episode->{'EpisodeName'} };			
+			}
+			next if(
+				defined($list{$id}{'episodes'}{$ename})
+				|| $count == 0 
+				|| $episode->{'EpisodeName'} eq ''
+			);
 			print "$serie->{'name'}: $ename\n";
 			if($log == 1){
 				make_path($dir) if( !(-e $dir));
