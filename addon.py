@@ -1,13 +1,14 @@
 import xbmcaddon
 import xbmcgui
-#import os
-import shlex, subprocess
+import os
 
-addon       = xbmcaddon.Addon()
-addonname   = addon.getAddonInfo('name')
-addondir    = xbmc.translatePath( addon.getAddonInfo('profile') )
+addon       = xbmcaddon.Addon('script.missing.seriesfinder')
+addondir    = xbmc.translatePath( addon.getAddonInfo('path') )
+addonsettings    = xbmc.translatePath( addon.getAddonInfo('profile') )
 
-xbmc.log("Program MissingSeriesFinder runs in Background");
-#xbmc.log("dir is: " + addondir);
-subprocess.call(["perl", "./MissingSeriesFinder.pl", "-path=" + addondir])
-xbmc.log("Program MissingSeriesFinder finished");
+xbmc.log("Program MissingSeriesFinder addondir: " + addondir)
+xbmc.log("Program MissingSeriesFinder addonsettings: " + addonsettings)
+
+command = "perl " + addondir + "/MissingSeriesFinder.pl -home=" + addondir + " -path=" + addonsettings
+xbmc.log("command: " + command)
+os.system(command)

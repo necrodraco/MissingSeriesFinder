@@ -10,12 +10,15 @@ use DBI;
 
 use POSIX "strftime";
 
+my $home = '';
 my $path   = '';
+
 GetOptions (
+	'home=s' => \$home, 
 	'path=s' => \$path, 
 ) or die("Error in command line arguments\n");
 
-if($path ne '' && -e $path ){
+if($path ne '' && -e $path && $home ne '' && -e $home){
 	my $source = XMLin($path.'settings.xml')->{'setting'};
 	
 	open OUTPUT, '>', $source->{'Path_to_Log'}->{'value'}.'missing.log' or die $!;
@@ -41,7 +44,7 @@ if($path ne '' && -e $path ){
 
 	my $sth = $dbh->prepare('
 		SELECT 
-			t.c00 as seriesName, t.c12 as seriesId, 
+			t.c00 as seriesName, t.c10 as seriesId, 
 		    e.c12 as seasonNumber, e.c13 as episodeNumber
 		FROM 
 			tvshow t
@@ -55,8 +58,10 @@ if($path ne '' && -e $path ){
 	my %list; 
 	if(defined($worked) && $worked ne '0E0'){
 		while(my $row = $sth->fetchrow_hashref()){
-			$list{$row->{'seriesId'}}{'name'} = $row->{'seriesName'} if(!defined($list{$row->{'seriesId'}}{'name'}));
-			$list{$row->{'seriesId'}}{'episodes'}{'S'.setDigit($row->{'seasonNumber'}).'E'.setDigit($row->{'episodeNumber'})} = 1;
+			my $id = (split(/.xml"/, (split(/cache="/, $row->{'seriesId'}))[1]))[0];
+			$id =~ s/\D//g;
+			$list{$id}{'name'} = $row->{'seriesName'} if(!defined($list{$id}{'name'}));
+			$list{$id}{'episodes'}{'S'.setDigit($row->{'seasonNumber'}).'E'.setDigit($row->{'episodeNumber'})} = 1;
 		}
 	}
 	
@@ -73,14 +78,14 @@ if($path ne '' && -e $path ){
 			next; 
 		}
 		
-		my $dir = $source->{'Path_to_Log'}->{'value'}."missing/$serie->{'name'}/";
+		my $dir = $source->{'Path_to_Log'}->{'value'}."MissingSeries/$serie->{'name'}/";
 		foreach my $episode(values %{$found->{'Episode'}}){
 			my $ename = 'S'.setDigit($episode->{'SeasonNumber'}).'E'.setDigit($episode->{'EpisodeNumber'}); 
 			next if(defined($list{$id}{'episodes'}{$ename}));
 			print "$serie->{'name'}: $ename\n";
 			if($log == 1){
 				make_path($dir) if( !(-e $dir));
-				cp('./resources/empty.disc', $dir."$ename.disc") or die 'copy Failed';
+				cp("$home/resources/empty.disc", $dir."$ename.disc") or die 'copy Failed';
 			};
 			
 		}
