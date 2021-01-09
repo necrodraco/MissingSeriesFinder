@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.missing.seriesfinder" name="Missing Series Finder" version="3.0.1" provider-name="none">
+<addon id="script.missing.seriesfinder" name="Missing Series Finder" version="4.0.1" provider-name="none">
 	<requires>
-		<import addon="xbmc.python" version="2.14.0"/>
+		<import addon="xbmc.python" version="2.25.0"/>
 	</requires>
 	<extension point="xbmc.python.script" library="addon.py">
 		<provides>executable</provides>
@@ -10,8 +10,8 @@
 		<platform>all</platform>
 		<summary lang="en">Missing Series Finder</summary>
 		<description lang="en">Did you think that one of your most series got an new episode or special episode? This addon tells you, if you got an new Episode and create an Log, where all the missing episodes will be listed</description>
-		<license>GNU General Public License, v2</license>
 		<language></language>
 		<email>ygohameln@gmail.com</email>
+		<platform>all</platform>
 	</extension>
 </addon>
