@@ -22,7 +22,6 @@ msgctxt "#32005"
 msgid "Supported SQLs for the Video Database"
 msgstr ""
 
-
 msgctxt "#32006"
 msgid "Ip of Database"
 msgstr ""

@@ -89,6 +89,7 @@ if($path ne '' && -e $path && $home ne '' && -e $home){
 				defined($list{$id}{'episodes'}{$ename})
 				|| $count == 0 
 				|| $episode->{'EpisodeName'} eq ''
+				|| $ename =~ m/E00/
 			);
 			print "$serie->{'name'}: $ename\n";
 			if($log == 1){
