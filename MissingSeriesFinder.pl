@@ -4,42 +4,38 @@ use Getopt::Long;
 use IO::Handle; 
 use File::Copy "cp"; 
 use File::Path "make_path";
-use XML::Simple; 
-use WWW::Mechanize;
+use XML::LibXML; 
+#use WWW::Mechanize;
 use DBI; 
 
 use POSIX "strftime";
 
+use Data::Dumper; 
+
 my $home = '';
 my $path   = '';
+my $test = 0; 
 
 GetOptions (
 	'home=s' => \$home, 
 	'path=s' => \$path, 
+	'test'   => \$test, 
 ) or die("Error in command line arguments\n");
 
 if($path ne '' && -e $path && $home ne '' && -e $home){
-	my $source = XMLin($path.'settings.xml')->{'setting'};
-	
-	open OUTPUT, '>', $source->{'Path_to_Log'}->{'value'}.'missing.log' or die $!;
-	STDOUT->fdopen( \*OUTPUT, 'w' ) or die $!;
+	my $parser = XML::LibXML->new(); 
+	my $source = readXML($parser, $path.'settings.xml'); 
+
+	open (OUTPUT, '>', $source->{'Path_to_Log'}.'missing.log') or die $!;
+	STDOUT->fdopen( \*OUTPUT, 'w' ) or die $! if(!$test);
 
 	print 'start: '.getTime();
 	my $log = 0;
-	$log = 1 if($source->{'LogOption'}->{'value'} eq 'true');
+	$log = 1 if($source->{'LogOption'} eq 'true');
 
 	my $dbh; 
-	if($source->{'sql'}->{'value'} == 0){
-		
-		my (
-			$db_host,$db_port, $db_name
-		) = (
-			$source->{'host'}->{'value'}, 
-			$source->{'port'}->{'value'}, 
-			$source->{'dbName'}->{'value'}
-		);
-		
-		$dbh = DBI->connect("DBI:mysql:database=$db_name;host=$db_host;port=$db_port", $source->{'username'}->{'value'}, $source->{'password'}->{'value'});
+	if($source->{'sql'} == 0){
+		$dbh = connectViaMySQL($source); 
 	}
 
 	my $sth = $dbh->prepare('
@@ -51,7 +47,9 @@ if($path ne '' && -e $path && $home ne '' && -e $home){
 		JOIN 
 			episode e 
 		ON 
-			t.idShow = e.idShow'
+			t.idShow = e.idShow
+		LIMIT 1
+	'
 	);
 	my $worked = $sth->execute();
 	
@@ -65,20 +63,37 @@ if($path ne '' && -e $path && $home ne '' && -e $home){
 		}
 	}
 	
-	my $urlReader = WWW::Mechanize->new(); 
-	my $found = ''; 
-	
+	#my $urlReader = WWW::Mechanize->new(); 
+	my $found; 
+	my $url = "https://thetvdb.com/series/cardfight-vanguard/allseasons/official"; 
+	eval{
+		$found = $parser->load_html(location => $url);
+		print "hier ein\n";
+		print Dumper($found);
+		print "hier out\n";
+	};
+	if($@){
+		print "Can't connect to Url $url. Series Name is $serie->{'name'}\n";
+	#	next; 
+	}
+	exit();
+	print "Ende";
+	exit(0);
 	while(my ($id, $serie) = each %list){
-		my $url = "http://www.thetvdb.com/api/1D62F2F90030C444/series/$id/all/en.xml"; 
+		my $url = "https://thetvdb.com/series/cardfight-vanguard/allseasons/official"; 
 		eval{
-			$found = XMLin($urlReader->get($url)->decoded_content());
+			$found = $parser->load_html(location=> $url);
+			print "hier ein\n";
+			print Dumper($found);
+			print "hier out\n";
 		};
 		if($@){
 			print "Can't connect to Url $url. Series Name is $serie->{'name'}\n";
-			next; 
+		#	next; 
 		}
+		exit();
 		
-		my $dir = $source->{'Path_to_Log'}->{'value'}."MissingSeries/$serie->{'name'}/";
+		my $dir = $source->{'Path_to_Log'}."MissingSeries/$serie->{'name'}/";
 		foreach my $episode(values %{$found->{'Episode'}}){
 			my $ename = 'S'.setDigit($episode->{'SeasonNumber'}).'E'.setDigit($episode->{'EpisodeNumber'}); 
 			my $count = 1; 
@@ -115,4 +130,27 @@ sub setDigit(){
 
 sub getTime(){
 	return strftime "%H:%M:%S \n", localtime(time); 
+}
+
+sub readXML(){
+	my ($parser, $file) = @_; 
+	my $dom= $parser->load_xml(location => $file);
+	@nodelist = $dom->getElementsByTagName('setting'); 
+	my $hash; 
+	foreach my $node(@nodelist){
+		$hash->{$node->getAttribute("id")} = $node->to_literal();
+	}
+	return $hash; 
+}
+
+sub connectViaMySQL(){
+	my ($source) = @_; 
+	my (
+		$db_host,$db_port, $db_name
+	) = (
+		$source->{'host'}, 
+		$source->{'port'}, 
+		$source->{'dbName'}
+	);
+	return DBI->connect("DBI:mysql:database=$db_name;host=$db_host;port=$db_port", $source->{'username'}, $source->{'password'});
 }
