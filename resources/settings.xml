@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <settings>
     <category label="32001" id="section_general">
-        <setting label="32003" id="Path_to_Log" type="folder" source="auto" option="writeable" />
-        <setting label="32004" id="LogOption" type="bool" default="false"/>
-        <setting label="32005" id="sql" type="select" lvalues="32011|32012" /> 
-    </category>
-    <category label="32002" id="section_sql">
-        <setting label="32006" type="text" id="host" default="127.0.0.1" /> 
-        <setting label="32007" type="text" id="port" default="3306"/>
-        <setting label="32008" type="text" id="dbName" default="MyVideos93"/>
-        <setting label="32009" type="text" id="username" />
-        <setting label="32010" type="text" id="password" option="hidden" />
+        <setting label="32002" id="Path_to_Log" type="folder" source="auto" option="writeable" />
+        <setting label="32003" id="LogOption" type="bool" default="false"/>
+        <setting label="32004" id="onlyReleased" type="bool" default="false"/>
+        <setting label="32005" id="tvdbapikey" type="text" default="" /> 
+        <setting label="32006" id="waitTime" type="slider" default="5.0" range="2.0,0.1,20.0" option="float" />
     </category>
 </settings>
