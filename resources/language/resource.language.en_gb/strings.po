@@ -1,0 +1,84 @@
+msgid ""
+msgstr ""
+"Language: en\n"
+
+msgctxt "#32001"
+msgid "General"
+msgstr ""
+
+msgctxt "#32002"
+msgid "Location where the Log File of Files will be saved"
+msgstr ""
+
+msgctxt "#32003"
+msgid "Will you want an File Structure with .disc-Files on the specified Folder of the Missing Episodes? "
+msgstr ""
+
+msgctxt "#32004"
+msgid "Will you only check for Released Episodes?"
+msgstr ""
+
+msgctxt "#32005"
+msgid "TvDB Api Key"
+msgstr ""
+
+msgctxt "#32006"
+msgid "Wait Time between each TvDB Api call"
+msgstr ""
+
+#Text in the script
+msgctxt "#32101"
+msgid "tvdbid is 0"
+msgstr ""
+
+msgctxt "#32102"
+msgid "Other Error"
+msgstr ""
+
+msgctxt "#32103"
+msgid "found TvShow %s"
+msgstr ""
+
+msgctxt "#32104"
+msgid "tvdbid is not set"
+msgstr ""
+
+msgctxt "#32105"
+msgid "Missing Episode"
+msgstr ""
+
+msgctxt "#32106"
+msgid "This episode doesn't exist in the library"
+msgstr ""
+
+msgctxt "#32107"
+msgid "write %s into Log"
+msgstr ""
+
+msgctxt "#32108"
+msgid "In Folder: %s\n"
+msgstr ""
+
+msgctxt "#32109"
+msgid "finished\n"
+msgstr ""
+
+msgctxt "#32110"
+msgid "Started searching for missing Shows"
+msgstr ""
+
+msgctxt "#32111"
+msgid "This List Contains all Missing Episodes for each Shows\n"
+msgstr ""
+
+msgctxt "#32112"
+msgid "This List Contains all Shows where 0 Seasons where found. Check them for mistakes\n"
+msgstr ""
+
+msgctxt "#32113"
+msgid "The following JSON-List contains all shows which got any problem during Scan. Propably rescrobble them with fixed data\n"
+msgstr ""
+
+msgctxt "#32114"
+msgid "Finished searching for missing Shows."
+msgstr ""

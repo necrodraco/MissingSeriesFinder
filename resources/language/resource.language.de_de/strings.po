@@ -1,0 +1,84 @@
+msgid ""
+msgstr ""
+"Language: en\n"
+
+msgctxt "#32001"
+msgid "General"
+msgstr "Generell"
+
+msgctxt "#32002"
+msgid "Location where the Log File of Files will be saved"
+msgstr "Ort wo die Log-Datei abgelegt werden soll"
+
+msgctxt "#32003"
+msgid "Will you want an File Structure with .disc-Files on the specified Folder of the Missing Episodes? "
+msgstr "Möchtest du eine Dateistruktur mit .disc-Dateien für die fehlenden Epsioden? "
+
+msgctxt "#32004"
+msgid "Will you only check for Released Episodes?"
+msgstr "Möchtest du nur auf releaste Episoden prüfen?"
+
+msgctxt "#32005"
+msgid "TvDB Api Key"
+msgstr "TvDB Api Key"
+
+msgctxt "#32006"
+msgid "Wait Time between each TvDB Api call"
+msgstr "Wartezeit zwischen jedem TvDB Api Calls"
+
+#Text in the script
+msgctxt "#32101"
+msgid "tvdbid is 0"
+msgstr "TVDbId ist 0"
+
+msgctxt "#32102"
+msgid "Other Error"
+msgstr "Anderer Fehler"
+
+msgctxt "#32103"
+msgid "found TvShow %s"
+msgstr "Gefundene TvShow %s"
+
+msgctxt "#32104"
+msgid "tvdbid is not set"
+msgstr "TvDbId ist nicht gesetzt"
+
+msgctxt "#32105"
+msgid "Missing Episode"
+msgstr "Fehlende Episode"
+
+msgctxt "#32106"
+msgid "This episode doesn't exist in the library"
+msgstr "Diese Episode existiert nicht in der Bibliothek"
+
+msgctxt "#32107"
+msgid "write %s into Log"
+msgstr "Schreibt %s ins Log"
+
+msgctxt "#32108"
+msgid "In Folder: %s\n"
+msgstr "Im Ordner: %s\n"
+
+msgctxt "#32109"
+msgid "finished\n"
+msgstr "Beendet\n"
+
+msgctxt "#32110"
+msgid "Started searching for missing Episodes"
+msgstr "Hat mit der Suche nach fehlenden Episoden begonnen"
+
+msgctxt "#32111"
+msgid "This List contains all Missing Episodes for each Shows\n"
+msgstr "Diese Liste beinhaltet alle fehlenden Episoden für jede Show"
+
+msgctxt "#32112"
+msgid "This List Contains all Shows where 0 Seasons where found. Check them for mistakes\n"
+msgstr "Diese Liste enthält alle Serien, die 0 Staffeln in der Bibliothek eingetragen hatten. Bitte auf Fehler prüfen. "
+
+msgctxt "#32113"
+msgid "The following JSON-List contains all shows which got any problem during Scan. Propably rescrobble them with fixed data\n"
+msgstr "Die folgende JSON-Liste enthält alle Serien, welche Probleme beim einscannen htten. Wahrscheinlich müssen sie neu eingescannt werden. "
+
+msgctxt "#32114"
+msgid "Finished searching for missing Shows."
+msgstr "Fertig mit suchen fehlender Serien"
